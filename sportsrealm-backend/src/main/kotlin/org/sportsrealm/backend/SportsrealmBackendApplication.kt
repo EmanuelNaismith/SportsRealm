@@ -1,4 +1,4 @@
-package org.sportsrealm.sportsrealmbackend
+package org.sportsrealm.backend
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

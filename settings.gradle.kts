@@ -1,1 +1,5 @@
-rootProject.name = "sportsrealm-backend"
+rootProject.name = "sportsrealm"
+
+include(
+    "sportsrealm-backend"
+)
