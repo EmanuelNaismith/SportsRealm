@@ -1,18 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    id("org.springframework.boot") version "3.0.2"
-    id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
-}
-
-group = "org.sportsrealm"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
-
-repositories {
-    mavenCentral()
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("org.jetbrains.kotlin.plugin.jpa")
 }
 
 dependencies {
@@ -23,12 +13,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
-    }
-}
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks.withType<Test> {
     useJUnitPlatform()

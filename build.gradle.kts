@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val ktlintVersion: String by project
+
 plugins {
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
@@ -7,12 +9,26 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
 }
 
-group = "org.sportsrealm"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+allprojects {
+    repositories {
+        mavenCentral()
+}
 
-repositories {
-    mavenCentral()
+subprojects {
+    apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    group = "org.sportsrealm"
+    version = "0.0.1-SNAPSHOT"
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "17"
+        }
+    }
+    ktlint {
+        version.set(ktlintVersion)
+    }
 }
 
 dependencies {
@@ -22,6 +38,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
